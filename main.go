@@ -18,7 +18,7 @@ func main() {
 		b.GetBlacklist()
 	}
 
-	// Return host information
+	// Returns host information
 	if *ip != "" {
 		var resp IpLookUp
 		err := resp.LookupIP(*ip)
