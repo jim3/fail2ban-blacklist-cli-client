@@ -69,8 +69,6 @@ func (b *BlacklistResponse) GetBlacklist() {
 
 }
 
-// --------------------------------------------------------
-
 type IpLookUp struct {
 	CPES      []string `json:"cpes"`
 	HostNames []string `json:"hostnames"`
@@ -100,8 +98,6 @@ func (i *IpLookUp) LookupIP(ipAddr string) error {
 	}
 	return nil
 }
-
-// --------------------------------------------------------
 
 type CVE struct {
 	Summary       string   `json:"summary"`
