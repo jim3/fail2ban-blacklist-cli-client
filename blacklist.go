@@ -60,7 +60,7 @@ func (b *BlacklistResponse) GetBlacklist() {
 		fmt.Printf("cpes: %v\n", cpeStr)
 		fmt.Printf("Hostname: %v\n", hostNames)
 		fmt.Printf("IP: %v\n", ipStr)
-		fmt.Printf("Open Ports: %v\n", portsStr)
+		fmt.Printf("Ports: %v\n", portsStr)
 		fmt.Printf("Tags: %v\n", tagsStr)
 		fmt.Printf("Vulns: %v\n", vulnStr)
 		fmt.Println()

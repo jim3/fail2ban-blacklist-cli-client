@@ -64,7 +64,7 @@ Looking up blacklisted ip address:  43.163.123.45
 cpes: [cpe:/a:openbsd:openssh:7.4]
 Hostname: []
 IP: 43.163.123.45
-Open Ports: [22]
+Ports: [22]
 Tags: []
 Vulns: [CVE-2020-14145 CVE-2025-32728 CVE-2021-36368 CVE-2023-51385 CVE-2018-20685 CVE-2019-6110 CVE-2019-6111 CVE-2023-48795 CVE-2018-15473 CVE-2008-3844 CVE-2023-38408 CVE-2020-15778 CVE-2016-20012 CVE-2007-2768 CVE-2017-15906 CVE-2023-51767 CVE-2019-6109 CVE-2025-26465 CVE-2018-15919 CVE-2021-41617]
 
@@ -74,7 +74,7 @@ Looking up blacklisted ip address:  178.62.239.88
 cpes: [cpe:/a:ruby-lang:ruby cpe:/a:f5:nginx cpe:/a:rubyonrails:rails cpe:/a:openbsd:openssh:6.6.1p1 cpe:/o:canonical:ubuntu_linux]
 Hostname: [gitlab.autorespond.nl]
 IP: 178.62.239.88
-Open Ports: [22 443]
+Ports: [22 443]
 Tags: [cloud self-signed]
 Vulns: []
 
@@ -84,7 +84,7 @@ Looking up blacklisted ip address:  181.64.27.145
 cpes: [cpe:/a:openbsd:openssh:9.2p1 cpe:/a:postfix:postfix cpe:/a:golang:go cpe:/a:apache:http_server:2.4.62 cpe:/o:linux:linux_kernel cpe:/a:apache:http_server cpe:/o:debian:debian_linux cpe:/a:caddyserver:caddy]
 Hostname: [nube.santateresa.pe imagenes.santateresa.pe]
 IP: 181.64.27.145
-Open Ports: [22 25 80 443 465 587 2211 2222 3478 5000 8001 8006 8042 8069 8090 10000 20000]
+Ports: [22 25 80 443 465 587 2211 2222 3478 5000 8001 8006 8042 8069 8090 10000 20000]
 Tags: [starttls]
 Vulns: [CVE-2009-2299 CVE-2013-4365 CVE-2011-1176 CVE-2024-43204 CVE-2013-2765 CVE-2025-65082 CVE-2024-42516 CVE-2012-3526 CVE-2009-0796 CVE-2025-53020 CVE-2025-58098 CVE-2025-49630 CVE-2011-2688 CVE-2007-4723 CVE-2013-0942 CVE-2024-47252 CVE-2012-4001 CVE-2025-55753 CVE-2013-0941 CVE-2025-66200 CVE-2012-4360 CVE-2024-43394 CVE-2025-49812 CVE-2025-59775 CVE-2025-23048]
 
