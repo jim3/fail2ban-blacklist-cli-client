@@ -14,8 +14,12 @@ type BlacklistResponse struct {
 	BannedIPs []string `json:"blacklist"`
 }
 
-func (b *BlacklistResponse) GetBlacklist() {
-	var requestURL string = "https://<your-domain>/blacklist"
+func (b *BlacklistResponse) GetBlacklist(count int) {
+	requestURL := os.Getenv("DOMAIN_NAME")
+	if requestURL == "" {
+		log.Fatal("DOMAIN_NAME environment variable is not set")
+	}
+
 	req, err := http.NewRequest(http.MethodGet, requestURL, nil)
 	if err != nil {
 		fmt.Printf("client request failed: %s\n", err)
@@ -28,7 +32,7 @@ func (b *BlacklistResponse) GetBlacklist() {
 		os.Exit(1)
 	}
 
-	fmt.Printf("STATUS CODE:%d\n", res.StatusCode)
+	fmt.Printf("STATUS CODE:%d\n\n", res.StatusCode)
 
 	resBody, err := io.ReadAll(res.Body)
 	if err != nil {
@@ -40,31 +44,23 @@ func (b *BlacklistResponse) GetBlacklist() {
 		fmt.Printf("%s\n", err)
 	}
 
-	var count int = 5 // for testing, to keep the output "sane")
 	for i := 0; i < count; i++ {
 		var resp IpLookUp
 		err = resp.LookupIP(b.BannedIPs[i])
 		if err != nil {
 			log.Fatalf("IP lookup failed: %v", err)
 		}
-
-		cpeStr := resp.CPES
-		hostNames := resp.HostNames
-		ipStr := resp.IP
-		portsStr := resp.Ports
-		tagsStr := resp.Tags
-		vulnStr := resp.Vulns
-
-		fmt.Println("Looking up blacklisted ip address: ", b.BannedIPs[i])
 		fmt.Println("===================================================")
-		fmt.Printf("cpes: %v\n", cpeStr)
-		fmt.Printf("Hostname: %v\n", hostNames)
-		fmt.Printf("IP: %v\n", ipStr)
-		fmt.Printf("Ports: %v\n", portsStr)
-		fmt.Printf("Tags: %v\n", tagsStr)
-		fmt.Printf("Vulns: %v\n", vulnStr)
+		fmt.Println("Looking up blacklisted ip address: ", b.BannedIPs[i])
+		fmt.Printf("CPEs: %v\n", resp.CPES)
+		fmt.Printf("Hostname: %v\n", resp.HostNames)
+		fmt.Printf("IP: %v\n", resp.IP)
+		fmt.Printf("Ports: %v\n", resp.Ports)
+		fmt.Printf("Tags: %v\n", resp.Tags)
+		fmt.Printf("Vulns: %v\n", resp.Vulns)
 		fmt.Println()
 		fmt.Println("===================================================")
+		fmt.Println()
 	}
 
 }

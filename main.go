@@ -4,18 +4,27 @@ import (
 	"flag"
 	"fmt"
 	"log"
+
+	"github.com/joho/godotenv"
 )
 
+func init() {
+	// Load .env file
+	if err := godotenv.Load(); err != nil {
+		log.Println("Warning: .env file not found, using environment variables")
+	}
+}
+
 func main() {
-	blacklist := flag.Bool("blacklist", false, "Get banned IP's")
+	blacklist := flag.Int("blacklist", 0, "Number of banned IPs to look up (default: 1)")
 	ip := flag.String("iplookup", "", "IP address to look up")
 	cve := flag.String("cve", "", "Look up CVE vuln")
 	flag.Parse()
 
 	// Get list of banned IP's
-	if *blacklist {
+	if *blacklist > 0 {
 		var b BlacklistResponse
-		b.GetBlacklist()
+		b.GetBlacklist(*blacklist)
 	}
 
 	// Returns host information
@@ -26,19 +35,14 @@ func main() {
 			log.Fatalf("IP lookup failed: %v", err)
 		}
 
-		cpeStr := resp.CPES
-		hostNames := resp.HostNames
-		ipStr := resp.IP
-		portsStr := resp.Ports
-		tagsStr := resp.Tags
-		vulnStr := resp.Vulns
 		fmt.Println("===================================================")
-		fmt.Printf("cpes: %v\n", cpeStr)
-		fmt.Printf("hostnames: %v\n", hostNames)
-		fmt.Printf("ip: %v\n", ipStr)
-		fmt.Printf("ports: %v\n", portsStr)
-		fmt.Printf("tags: %v\n", tagsStr)
-		fmt.Printf("vulns: %v\n", vulnStr)
+		fmt.Printf("CPEs: %v\n", resp.CPES)
+		fmt.Printf("Hostname: %v\n", resp.HostNames)
+		fmt.Printf("IP: %v\n", resp.IP)
+		fmt.Printf("Ports: %v\n", resp.Ports)
+		fmt.Printf("Tags: %v\n", resp.Tags)
+		fmt.Printf("Vulns: %v\n", resp.Vulns)
+		fmt.Println()
 		fmt.Println("===================================================")
 	}
 
@@ -49,8 +53,12 @@ func main() {
 		if err != nil {
 			log.Fatalf("CVE lookup failed: %v", err)
 		}
+
+		fmt.Println("------------------------------- Summary -------------------------------")
 		fmt.Println(c.Summary)
+		fmt.Println("------------------------------- PublishedTime -------------------------------")
 		fmt.Println(c.PublishedTime)
+		fmt.Println("------------------------------- References -------------------------------")
 		fmt.Println(c.References)
 	}
 }

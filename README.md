@@ -11,14 +11,14 @@ A Go-based command-line tool for querying blacklisted IP addresses from my [Fail
 ## Usage
 
 ```bash
-# Get list of banned IPs and lookup details for the first 5 ([-count] option added soon)
-go run . -blacklist # [-count 5]
+# Get list of banned IPs and lookup details 
+go run . -blacklist [count] # Specify the count of ip addresses to retrieve, e.g., -blacklist 5
 
 # Look up specific IP address
 go run . -iplookup "8.8.8.8"
 
 # Look up CVE information
-go run . -cve "CVE-2017-3646"
+go run . -cve "CVE-2025-55182"
 ```
 
 ## Code Structure
@@ -57,27 +57,7 @@ Built as part of my portfolio for junior security analyst and penetration testin
 ## Example Output
 
 ```bash
-$ go run . -blacklist
-===================================================
-Looking up blacklisted ip address:  43.163.123.45
-===================================================
-cpes: [cpe:/a:openbsd:openssh:7.4]
-Hostname: []
-IP: 43.163.123.45
-Ports: [22]
-Tags: []
-Vulns: [CVE-2020-14145 CVE-2025-32728 CVE-2021-36368 CVE-2023-51385 CVE-2018-20685 CVE-2019-6110 CVE-2019-6111 CVE-2023-48795 CVE-2018-15473 CVE-2008-3844 CVE-2023-38408 CVE-2020-15778 CVE-2016-20012 CVE-2007-2768 CVE-2017-15906 CVE-2023-51767 CVE-2019-6109 CVE-2025-26465 CVE-2018-15919 CVE-2021-41617]
-
-===================================================
-Looking up blacklisted ip address:  178.62.239.88
-===================================================
-cpes: [cpe:/a:ruby-lang:ruby cpe:/a:f5:nginx cpe:/a:rubyonrails:rails cpe:/a:openbsd:openssh:6.6.1p1 cpe:/o:canonical:ubuntu_linux]
-Hostname: [gitlab.autorespond.nl]
-IP: 178.62.239.88
-Ports: [22 443]
-Tags: [cloud self-signed]
-Vulns: []
-
+$ go run . -blacklist 1
 ===================================================
 Looking up blacklisted ip address:  181.64.27.145
 ===================================================
@@ -90,3 +70,4 @@ Vulns: [CVE-2009-2299 CVE-2013-4365 CVE-2011-1176 CVE-2024-43204 CVE-2013-2765 C
 
 ===================================================
 ```
+
