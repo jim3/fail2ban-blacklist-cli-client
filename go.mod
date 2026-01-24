@@ -1,4 +1,4 @@
-module simple-http-client
+module fail2ban-blacklist-cli-client
 
 go 1.21
 

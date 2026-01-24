@@ -17,7 +17,7 @@ type BlacklistResponse struct {
 func (b *BlacklistResponse) GetBlacklist(count int) {
 	requestURL := os.Getenv("DOMAIN_NAME")
 	if requestURL == "" {
-		log.Fatal("DOMAIN_NAME environment variable is not set")
+		log.Fatal("environment variable is not set")
 	}
 
 	req, err := http.NewRequest(http.MethodGet, requestURL, nil)
@@ -31,7 +31,6 @@ func (b *BlacklistResponse) GetBlacklist(count int) {
 		fmt.Printf("client response failed: %s\n", err)
 		os.Exit(1)
 	}
-
 	fmt.Printf("STATUS CODE:%d\n\n", res.StatusCode)
 
 	resBody, err := io.ReadAll(res.Body)
@@ -45,13 +44,15 @@ func (b *BlacklistResponse) GetBlacklist(count int) {
 	}
 
 	for i := 0; i < count; i++ {
+		ipAddr := b.BannedIPs[i]
+
 		var resp IpLookUp
-		err = resp.LookupIP(b.BannedIPs[i])
+		err = resp.LookupIP(ipAddr)
 		if err != nil {
 			log.Fatalf("IP lookup failed: %v", err)
 		}
 		fmt.Println("===================================================")
-		fmt.Println("Looking up blacklisted ip address: ", b.BannedIPs[i])
+		fmt.Println("Looking up blacklisted ip address: ", ipAddr)
 		fmt.Printf("CPEs: %v\n", resp.CPES)
 		fmt.Printf("Hostname: %v\n", resp.HostNames)
 		fmt.Printf("IP: %v\n", resp.IP)
