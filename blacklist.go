@@ -15,7 +15,7 @@ type BlacklistResponse struct {
 }
 
 func (b *BlacklistResponse) GetBlacklist(count int) {
-	requestURL := os.Getenv("DOMAIN_NAME")
+	requestURL := os.Getenv("API_ENDPOINT")
 	if requestURL == "" {
 		log.Fatal("environment variable is not set")
 	}
